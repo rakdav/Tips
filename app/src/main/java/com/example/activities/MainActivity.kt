@@ -43,6 +43,7 @@ class MainActivity : AppCompatActivity() {
         binding.seekBarTip.setOnSeekBarChangeListener(object:OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
                 if(binding.editTextSum.text.toString().isNotEmpty()) {
+                    tipProcent=progress
                     sum = binding.editTextSum.text.toString().toDouble()
                     total = sum + (sum * progress / 100)
                     Log.d("total", total.toString())
@@ -58,6 +59,9 @@ class MainActivity : AppCompatActivity() {
         })
         binding.buttonSend.setOnClickListener {
             val intent=Intent(baseContext,TipActivity::class.java)
+            intent.putExtra("tipProcent",tipProcent)
+            intent.putExtra("sum",sum)
+            intent.putExtra("total",total)
             startActivity(intent)
         }
     }
