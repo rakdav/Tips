@@ -59,10 +59,15 @@ class MainActivity : AppCompatActivity() {
         })
         binding.buttonSend.setOnClickListener {
             val intent=Intent(baseContext,TipActivity::class.java)
-            intent.putExtra("tipProcent",tipProcent)
-            intent.putExtra("sum",sum)
-            intent.putExtra("total",total)
+            intent.putExtra(TIP_PROCENT,tipProcent)
+            intent.putExtra(SUM,sum)
+            intent.putExtra(TOTAL,total)
             startActivity(intent)
         }
+    }
+    companion object{
+        val TIP_PROCENT="tipProcent"
+        val SUM="sum"
+        val  TOTAL="total"
     }
 }

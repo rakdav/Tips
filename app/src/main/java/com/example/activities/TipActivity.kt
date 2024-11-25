@@ -17,9 +17,13 @@ class TipActivity : AppCompatActivity() {
         binding=ActivityTipBinding.inflate(layoutInflater)
         setContentView(binding.root)
         if(intent.extras!=null){
-            binding.textViewProcent.text= intent.extras!!.getInt("tipProcent").toString()
-            binding.textViewSum.text=intent.extras!!.getDouble("sum").toString()
-            binding.textViewTotal.text=intent.extras!!.getDouble("total").toString()
+            binding.textViewProcent.text= resources.getString(R.string.tip)+
+                    intent.extras!!.getInt(MainActivity.TIP_PROCENT).toString()
+            binding.textViewSum.text=resources.getString(R.string.sum)+
+                    intent.extras!!.getDouble(MainActivity.SUM).toString()
+            binding.textViewTotal.text=resources.getString(R.string.total)+
+                    intent.extras!!.getDouble(MainActivity.TOTAL).toString()
         }
     }
+
 }
