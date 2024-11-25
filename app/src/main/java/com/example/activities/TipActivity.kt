@@ -1,6 +1,7 @@
 package com.example.activities
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -23,6 +24,18 @@ class TipActivity : AppCompatActivity() {
                     intent.extras!!.getDouble(MainActivity.SUM).toString()
             binding.textViewTotal.text=resources.getString(R.string.total)+
                     intent.extras!!.getDouble(MainActivity.TOTAL).toString()
+            binding.buttonOk.setOnClickListener {
+                val data=Intent()
+                data.putExtra(MainActivity.MESSAGE,"OK")
+                setResult(RESULT_OK,data)
+                finish()
+            }
+            binding.buttonCancel.setOnClickListener {
+                val data=Intent()
+                data.putExtra(MainActivity.MESSAGE,"Cancel")
+                setResult(RESULT_CANCELED,data)
+                finish()
+            }
         }
     }
 

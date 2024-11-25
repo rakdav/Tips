@@ -1,5 +1,6 @@
 package com.example.activities
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
@@ -7,6 +8,9 @@ import android.text.TextWatcher
 import android.util.Log
 import android.widget.SeekBar
 import android.widget.SeekBar.OnSeekBarChangeListener
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.ActivityResultCallback
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -62,12 +66,29 @@ class MainActivity : AppCompatActivity() {
             intent.putExtra(TIP_PROCENT,tipProcent)
             intent.putExtra(SUM,sum)
             intent.putExtra(TOTAL,total)
-            startActivity(intent)
+           // startActivity(intent)
+            StartForResult.launch(intent)
         }
     }
     companion object{
         val TIP_PROCENT="tipProcent"
         val SUM="sum"
         val  TOTAL="total"
+        val MESSAGE="message"
     }
+    private val StartForResult =registerForActivityResult(ActivityResultContracts.StartActivityForResult(),
+        {
+            result:ActivityResult->
+            run {
+                if (result.resultCode == Activity.RESULT_OK) {
+                    val intent = result.data
+                    val mes = intent?.getStringExtra(MESSAGE)
+                    if(mes.equals("OK"))
+                        binding.imageView.setImageResource(R.drawable.ok)
+                }
+                else
+                    binding.imageView.setImageResource(R.drawable.cancel)
+            }
+        }
+       )
 }
