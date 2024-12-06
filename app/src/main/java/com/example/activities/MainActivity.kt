@@ -34,9 +34,11 @@ class MainActivity : AppCompatActivity() {
                 if(s.toString().isNotEmpty()) {
                     sum = s.toString().toDouble()
                     tipProcent = binding.seekBarTip.progress
-                    total = sum + (sum * tipProcent / 100)
+                    //total = sum + (sum * tipProcent / 100)
+                    val calc=TipCalculator(tipProcent,sum)
+                    total=calc.GetTotal()
                     Log.d("procent", tipProcent.toString())
-                    Log.d("total", total.toString())
+                    Log.d("total", calc.GetTotal().toString())
                 }
             }
             override fun afterTextChanged(s: Editable?) {
@@ -49,7 +51,9 @@ class MainActivity : AppCompatActivity() {
                 if(binding.editTextSum.text.toString().isNotEmpty()) {
                     tipProcent=progress
                     sum = binding.editTextSum.text.toString().toDouble()
-                    total = sum + (sum * progress / 100)
+                    //total = sum + (sum * progress / 100)
+                    val calc=TipCalculator(tipProcent,sum)
+                    total=calc.GetTotal()
                     Log.d("total", total.toString())
                 }
             }
